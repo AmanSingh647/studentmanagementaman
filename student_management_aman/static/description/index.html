@@ -1,48 +1,282 @@
-<!-- <section>
-    <h1>Student Management</h1>
-    <p>
-        Manage student records including name, age, and email.
-    </p>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
 
-    <h2>Features</h2>
-    <ul>
-        <li>Create students</li>
-        <li>Edit students</li>
-        <li>Delete students</li>
-        <li>List all students</li>
-    </ul>
-</section> -->
+body{
+    font-family: 'Segoe UI', sans-serif;
+    background:#f5f8fc;
+    color:#1f2937;
+}
 
-<section style="background:#eef5f5;padding:50px;font-family:Arial">
+.container{
+    max-width:1200px;
+    margin:auto;
+}
 
-    <h1 style="text-align:center">
-        Student Management System
-    </h1>
+/* Hero */
+.hero{
+    background:linear-gradient(135deg,#4f46e5,#0ea5e9);
+    color:white;
+    border-radius:20px;
+    padding:60px;
+    text-align:center;
+}
 
-    <div style="display:flex;gap:20px;justify-content:center">
+.hero h1{
+    font-size:48px;
+    margin-bottom:10px;
+}
 
-        <div style="
-            background:#06132e;
-            color:white;
-            width:180px;
-            padding:25px;
-            border-radius:15px;
-            text-align:center;">
-            <h2>#1</h2>
-            <h3>Since 2026</h3>
+.hero p{
+    font-size:18px;
+    opacity:.95;
+}
+
+.btn{
+    display:inline-block;
+    padding:14px 30px;
+    background:white;
+    color:#4f46e5;
+    text-decoration:none;
+    border-radius:8px;
+    font-weight:600;
+    margin-top:25px;
+}
+
+/* Statistics */
+
+.stats{
+    display:flex;
+    justify-content:space-between;
+    margin-top:35px;
+    gap:20px;
+}
+
+.card{
+    background:white;
+    border-radius:18px;
+    padding:30px;
+    width:25%;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.card h2{
+    color:#4f46e5;
+    font-size:34px;
+    margin:0;
+}
+
+.card p{
+    color:#64748b;
+}
+
+/* Features */
+
+.section-title{
+    text-align:center;
+    margin-top:70px;
+    margin-bottom:40px;
+}
+
+.section-title h2{
+    font-size:38px;
+    color:#111827;
+}
+
+.features{
+    display:flex;
+    flex-wrap:wrap;
+    gap:25px;
+}
+
+.feature-box{
+    background:white;
+    width:30%;
+    padding:30px;
+    border-radius:18px;
+    box-shadow:0 8px 25px rgba(0,0,0,.07);
+}
+
+.feature-box h3{
+    color:#4f46e5;
+    margin-top:0;
+}
+
+.feature-box p{
+    color:#6b7280;
+    line-height:1.7;
+}
+
+/* Benefits */
+
+.benefits{
+    background:white;
+    border-radius:20px;
+    margin-top:60px;
+    padding:50px;
+    box-shadow:0 10px 30px rgba(0,0,0,.07);
+}
+
+.benefits ul{
+    list-style:none;
+    padding:0;
+}
+
+.benefits li{
+    margin-bottom:20px;
+    font-size:17px;
+}
+
+/* Footer */
+
+.footer{
+    margin-top:60px;
+    background:#111827;
+    color:white;
+    border-radius:20px;
+    text-align:center;
+    padding:50px;
+}
+
+.footer h2{
+    margin-bottom:10px;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Hero -->
+    <div class="hero">
+        <h1>🎓 Student Management System</h1>
+
+        <p>
+            Manage Students, Admissions, Attendance,
+            Fees, Exams and Academic Records effortlessly.
+        </p>
+
+        <a class="btn">Easy Setup • Odoo 19 Ready</a>
+    </div>
+
+
+    <!-- Statistics -->
+    <div class="stats">
+
+        <div class="card">
+            <h2>100%</h2>
+            <p>Integrated with Odoo</p>
         </div>
 
-        <div style="
-            background:#06132e;
-            color:white;
-            width:180px;
-            padding:25px;
-            border-radius:15px;
-            text-align:center;">
-            <h2>Most</h2>
-            <h3>Effective</h3>
+        <div class="card">
+            <h2>10+</h2>
+            <p>Core Modules</p>
+        </div>
+
+        <div class="card">
+            <h2>24/7</h2>
+            <p>Support Available</p>
+        </div>
+
+        <div class="card">
+            <h2>Fast</h2>
+            <p>Easy Deployment</p>
         </div>
 
     </div>
 
-</section>
+
+    <!-- Features -->
+    <div class="section-title">
+        <h2>Key Features</h2>
+    </div>
+
+    <div class="features">
+
+        <div class="feature-box">
+            <h3>👨‍🎓 Student Records</h3>
+            <p>
+                Maintain complete student profiles,
+                academic history and personal information.
+            </p>
+        </div>
+
+        <div class="feature-box">
+            <h3>📝 Admissions</h3>
+            <p>
+                Simplify registration and admission
+                processes with automated workflows.
+            </p>
+        </div>
+
+        <div class="feature-box">
+            <h3>📅 Attendance Management</h3>
+            <p>
+                Record and monitor daily attendance
+                efficiently.
+            </p>
+        </div>
+
+        <div class="feature-box">
+            <h3>💳 Fee Management</h3>
+            <p>
+                Generate invoices and track fee
+                collections with ease.
+            </p>
+        </div>
+
+        <div class="feature-box">
+            <h3>📚 Courses & Subjects</h3>
+            <p>
+                Manage classes, subjects and academic
+                structures.
+            </p>
+        </div>
+
+        <div class="feature-box">
+            <h3>📊 Exams & Results</h3>
+            <p>
+                Publish marksheets and analyze
+                student performance.
+            </p>
+        </div>
+
+    </div>
+
+
+    <!-- Benefits -->
+    <div class="benefits">
+
+        <h2>Why Choose This Module?</h2>
+
+        <ul>
+            <li>✅ Centralized student database.</li>
+            <li>✅ Reduces manual paperwork.</li>
+            <li>✅ Streamlines academic operations.</li>
+            <li>✅ User-friendly interface.</li>
+            <li>✅ Fully compatible with Odoo 19.</li>
+            <li>✅ Scalable for schools, colleges and universities.</li>
+        </ul>
+
+    </div>
+
+
+    <!-- Footer -->
+    <div class="footer">
+
+        <h2>Transform Educational Management</h2>
+
+        <p>
+            Streamline admissions, attendance, fees and examinations
+            using a powerful Student Management System built for Odoo.
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+</html>

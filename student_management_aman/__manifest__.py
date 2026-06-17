@@ -1,5 +1,5 @@
 {
-    'name': 'Student Management',
+    'name': 'Student Management Aman',
     'version': '19.0.1.0.0',
     'category': 'Education',
     'summary': 'Manage student records',

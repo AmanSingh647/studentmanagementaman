@@ -1,208 +1,418 @@
-<style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopify Odoo Connector</title>
+    <style>
+        /* Base Reset & Variables */
+        :root {
+            --bg-color: #f1f6f6;
+            --dark-card: #161c28;
+            --green-accent: #22c55e;
+            --text-dark: #0f172a;
+            --text-gray: #64748b;
+            --border-light: #e2e8f0;
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
 
-.sms-banner{
-    background:linear-gradient(135deg,#4f46e5,#2563eb);
-    border-radius:20px;
-    padding:60px 40px;
-    color:white;
-    text-align:center;
-    margin-bottom:30px;
-}
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            font-family: var(--font-main);
+            color: var(--text-dark);
+        }
 
-.sms-title{
-    font-size:42px;
-    font-weight:700;
-    margin-bottom:15px;
-}
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
 
-.sms-subtitle{
-    font-size:18px;
-    line-height:30px;
-}
+        /* Top Header Area */
+        h1.main-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--text-dark);
+        }
 
-.sms-card{
-    background:white;
-    border-radius:15px;
-    padding:30px;
-    box-shadow:0px 5px 20px rgba(0,0,0,.08);
-    margin-bottom:25px;
-    min-height:220px;
-}
+        /* Top Badges Row */
+        .badges-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
 
-.sms-card h3{
-    color:#4f46e5;
-    margin-bottom:20px;
-}
+        .badge-card {
+            background-color: var(--dark-card);
+            color: white;
+            flex: 1;
+            min-width: 140px;
+            padding: 20px 10px;
+            border-radius: 12px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
 
-.sms-stats{
-    background:#0f172a;
-    color:white;
-    text-align:center;
-    padding:30px;
-    border-radius:15px;
-    margin-bottom:20px;
-}
+        .badge-card .highlight-green {
+            color: var(--green-accent);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            line-height: 1;
+        }
 
-.sms-benefits{
-    background:#f8fafc;
-    border-radius:20px;
-    padding:40px;
-}
+        .badge-card .sub-text {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
 
-.sms-footer{
-    background:#111827;
-    color:white;
-    border-radius:20px;
-    text-align:center;
-    padding:50px;
-    margin-top:40px;
-}
+        .badge-card .stars {
+            color: #fbbf24;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
 
-</style>
+        .badge-card .icon {
+            font-size: 1.5rem;
+            color: var(--green-accent);
+            margin-bottom: 5px;
+        }
+        
+        .odoo-logo span {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .odoo-logo .gold {
+            background-color: #fbbf24;
+            color: var(--dark-card);
+            font-size: 0.6rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-top: 5px;
+            display: inline-block;
+        }
 
-<section class="sms-banner">
+        /* Main Content Layout */
+        .content-split {
+            display: flex;
+            gap: 40px;
+        }
 
-    <h1 class="sms-title">
-        🎓 Student Management System
-    </h1>
+        .left-col {
+            flex: 1.1;
+            display: flex;
+            flex-direction: column;
+        }
 
-    <p class="sms-subtitle">
-        Manage Students, Admissions, Attendance, Fees,
-        Courses and Examinations efficiently inside Odoo.
-    </p>
+        .right-col {
+            flex: 0.9;
+        }
 
-</section>
+        /* Left Column Content */
+        .left-col h2 {
+            font-size: 1.4rem;
+            line-height: 1.4;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
 
+        .left-col p.description {
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+        }
 
-<div class="row">
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
 
-    <div class="col-md-3">
-        <div class="sms-stats">
-            <h2>10+</h2>
-            Features
+        .feature-item {
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            line-height: 1.4;
+        }
+
+        .check-mark {
+            background-color: #dcfce7;
+            color: var(--green-accent);
+            border-radius: 4px;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        /* Call To Action Box */
+        .cta-box {
+            background-color: var(--dark-card);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: auto;
+        }
+
+        .cta-box h3 {
+            margin: 0 0 8px 0;
+            font-size: 1.1rem;
+        }
+
+        .cta-box p {
+            margin: 0 0 20px 0;
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            background-color: var(--green-accent);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .btn:hover {
+            background-color: #1ea34d;
+        }
+
+        /* Right Column Content - Card styling */
+        .right-card {
+            background-color: white;
+            border: 4px solid var(--dark-card);
+            border-radius: 16px;
+            padding: 20px;
+            height: 100%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .module-item {
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 20px 15px;
+        }
+
+        .module-item .mod-icon {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .module-item h4 {
+            margin: 0 0 5px 0;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+        }
+
+        .module-item p {
+            margin: 0;
+            font-size: 0.75rem;
+            color: var(--text-gray);
+            line-height: 1.4;
+        }
+
+        /* Positioning Bottom Box */
+        .positioning-box {
+            background-color: var(--green-accent);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: auto;
+        }
+
+        .positioning-box .tag {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .positioning-box h4 {
+            margin: 0 0 8px 0;
+            font-size: 1.1rem;
+        }
+
+        .positioning-box p {
+            margin: 0;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: #dcfce7;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .content-split {
+                flex-direction: column;
+            }
+            .left-col {
+                margin-bottom: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .features-grid, .modules-grid {
+                grid-template-columns: 1fr;
+            }
+            .badge-card {
+                min-width: 45%;
+            }
+            .btn-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="main-title">Student Management</h1>
+
+    <div class="badges-row">
+        <div class="badge-card">
+            <div class="highlight-green">#1</div>
+            <div class="sub-text">Since 2014</div>
+        </div>
+        <div class="badge-card">
+            <div class="sub-text">Trusted in</div>
+            <div class="highlight-green" style="font-size: 0.9rem;">USA, Europe &<br>Beyond</div>
+        </div>
+        <div class="badge-card">
+            <div class="stars">★★★★★</div>
+            <div class="sub-text">Most Rated</div>
+        </div>
+        <div class="badge-card">
+            <div class="icon">📈</div>
+            <div class="sub-text">Most Selling</div>
+        </div>
+        <div class="badge-card">
+            <div class="odoo-logo">
+                <span style="color: #a855f7;">odoo</span><br>
+                <div class="gold">Gold Partner</div>
+            </div>
+        </div>
+        <div class="badge-card">
+            <div class="highlight-green">10K+</div>
+            <div class="sub-text">Customers</div>
         </div>
     </div>
 
-    <div class="col-md-3">
-        <div class="sms-stats">
-            <h2>100%</h2>
-            Odoo Native
-        </div>
-    </div>
+    <div class="content-split">
+        
+        <div class="left-col">
+            <h2>Bring shopify operations into Odoo with better control and reliable day-to-day performance</h2>
+            <p class="description">
+                Manage products, inventory, orders, fulfilment, returns, refunds, payouts, and customer data between Odoo and Shopify through a mature connector built for real business workflows.
+            </p>
 
-    <div class="col-md-3">
-        <div class="sms-stats">
-            <h2>24/7</h2>
-            Support
-        </div>
-    </div>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="check-mark">✓</div>
+                    <span>Built and maintained since 2013<br>(Odoo V8 era)</span>
+                </div>
+                <div class="feature-item">
+                    <div class="check-mark">✓</div>
+                    <span>Trusted across thousands of real-world use cases</span>
+                </div>
+                <div class="feature-item">
+                    <div class="check-mark">✓</div>
+                    <span>Designed for standard live operations, not demo-only flows</span>
+                </div>
+                <div class="feature-item">
+                    <div class="check-mark">✓</div>
+                    <span>Upgrade-safe by design — no core changes to Odoo or Shopify</span>
+                </div>
+            </div>
 
-    <div class="col-md-3">
-        <div class="sms-stats">
-            <h2>Fast</h2>
-            Deployment
+            <div class="cta-box">
+                <h3>Implementation Included With Purchase (No Extra Cost)*</h3>
+                <p>10 Hours Of Expert-Led Implementation <strong>(Valued At US $500)</strong></p>
+                <div class="btn-group">
+                    <button class="btn">Start Evaluation →</button>
+                    <button class="btn">Implementation Detail →</button>
+                </div>
+            </div>
         </div>
-    </div>
 
+        <div class="right-col">
+            <div class="right-card">
+                
+                <div class="modules-grid">
+                    <div class="module-item">
+                        <span class="mod-icon">📉</span>
+                        <h4>Sales Ops</h4>
+                        <p>Orders, Fulfillment, Returns, Refunds</p>
+                    </div>
+                    <div class="module-item">
+                        <span class="mod-icon">📦</span>
+                        <h4>Inventory</h4>
+                        <p>Stock Sync between Odoo & Shopify</p>
+                    </div>
+                    <div class="module-item">
+                        <span class="mod-icon">🗃️</span>
+                        <h4>Catalog</h4>
+                        <p>Products, Variants, Pricing, Publishing</p>
+                    </div>
+                    <div class="module-item">
+                        <span class="mod-icon">💵</span>
+                        <h4>Finance</h4>
+                        <p>Get An Insight of Net Profit/Loss*</p>
+                    </div>
+                </div>
+
+                <div class="positioning-box">
+                    <span class="tag">POSITIONING</span>
+                    <h4>Mature Shopify Connector. Operationally Safer.</h4>
+                    <p>Not just sync coverage — better live readiness for Shopify businesses running on Odoo.</p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
 </div>
 
-
-<h2 align="center" style="margin-top:50px;margin-bottom:40px;">
-    ✨ Key Features
-</h2>
-
-
-<div class="row">
-
-    <div class="col-md-4">
-        <div class="sms-card">
-            <h3>👨‍🎓 Student Records</h3>
-
-            Maintain complete student profiles and
-            academic information.
-        </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="sms-card">
-            <h3>📝 Admissions</h3>
-
-            Streamline the admission and registration
-            process.
-        </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="sms-card">
-            <h3>📅 Attendance</h3>
-
-            Easily record and monitor student attendance.
-        </div>
-    </div>
-
-</div>
-
-
-<div class="row">
-
-    <div class="col-md-4">
-        <div class="sms-card">
-            <h3>💳 Fee Management</h3>
-
-            Track payments and generate invoices.
-        </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="sms-card">
-            <h3>📚 Courses & Subjects</h3>
-
-            Manage classes and academic structure.
-        </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="sms-card">
-            <h3>📊 Examinations</h3>
-
-            Publish results and analyze performance.
-        </div>
-    </div>
-
-</div>
-
-
-<div class="sms-benefits">
-
-    <h2>🚀 Why Choose This Module?</h2>
-
-    <br/>
-
-    ✅ Centralized student database.<br/><br/>
-
-    ✅ Admission workflow automation.<br/><br/>
-
-    ✅ Attendance tracking.<br/><br/>
-
-    ✅ Fee management and invoicing.<br/><br/>
-
-    ✅ Examination and marksheet generation.<br/><br/>
-
-    ✅ Compatible with Odoo 19.<br/>
-
-</div>
-
-
-<div class="sms-footer">
-
-    <h2>
-        Transform Educational Management
-    </h2>
-
-    <br/>
-
-    Streamline admissions, attendance,
-    fees and examinations with a powerful
-    Student Management System built for Odoo.
-
-</div>
+</body>
+</html>
